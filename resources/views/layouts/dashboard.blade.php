@@ -27,7 +27,22 @@
     <!-- end leftbar-tab-menu-->
     <div class="page-wrapper">
         <!-- Page Content-->
-        @yield('content')
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="row">
+                    @include('dashboard.components.breadcrumb')
+                </div><!--end row-->
+                {{-- Content --}}
+                    @yield('content')
+                {{-- Content --}}
+            </div><!-- container -->
+
+            @include('dashboard.components.rightbar')
+
+            @include('dashboard.components.footer')
+
+            <!--end footer-->
+        </div>
         <!-- end page content -->
     </div>
     <!-- end page-wrapper -->
@@ -40,6 +55,7 @@
     <script src="{{ asset('assets/js/pages/index.init.js') }}"></script>
     <script src="{{ asset('assets/js/DynamicSelect.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
+    @stack('scripts')
 </body>
 <!--end body-->
 
