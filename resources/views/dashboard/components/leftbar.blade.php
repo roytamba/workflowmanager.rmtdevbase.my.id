@@ -23,15 +23,15 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="/dashboard">
                             <i class="iconoir-report-columns menu-icon"></i>
                             <span>Dashboard</span>
                         </a>
                     </li><!--end nav-item-->
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/project">
                             <i class="iconoir-fire-flame menu-icon"></i>
-                            <span>Project Management</span>
+                            <span>Project</span>
                         </a>
                     </li><!--end nav-item-->
                     <!--end nav-item-->

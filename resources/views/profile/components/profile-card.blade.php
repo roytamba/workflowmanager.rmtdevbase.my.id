@@ -22,13 +22,13 @@
                         </div>
                     </div>
                     <div class="flex-grow-1 text-truncate ms-3 align-self-end">
-                        <h5 class="m-0 fs-3 fw-bold">Karen Savage</h5>
-                        <p class="text-muted mb-0">@karen</p>
+                        <h5 class="m-0 fs-3 fw-bold">{{ Auth::user()->name ? explode(' ', Auth::user()->name)[0] : '' }}</h5>
+                        <p class="text-muted mb-0">{{ Auth::user()->email }}</p>
                     </div><!--end media body-->
                 </div><!--end media-->
             </div><!--end col-->
         </div><!--end row-->
-        <div class="row align-items-center">
+        {{-- <div class="row align-items-center">
             <div class="col-lg-12">
                 <div class="mt-3">
                     <div class="text-body mb-2  d-flex align-items-center"><i
@@ -46,7 +46,7 @@
                     <button type="button" class="btn btn-light  d-inline-block">Hire Me</button>
                 </div>
             </div><!--end col-->
-        </div><!--end row-->
+        </div><!--end row--> --}}
 
     </div><!--end card-body-->
 </div><!--end card-->

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -47,6 +49,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     // Dashboard
     Route::get('/dashboard', fn() => view('dashboard.index'))->name('dashboard');
-    Route::get('/profile', fn() => view('profile.index'))->name('profile');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::delete('/profile/delete', [AuthController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/project', [ProjectController::class, 'index'])->name('projects.index');
+    Route::post('/project', [ProjectController::class, 'store'])->name('projects.store');
 });

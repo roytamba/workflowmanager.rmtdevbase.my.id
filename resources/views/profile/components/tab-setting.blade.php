@@ -9,30 +9,93 @@
                 @csrf
                 @method('PUT')
 
+                {{-- Full Name --}}
                 <div class="form-group mb-3 row">
                     <label class="col-xl-3 col-lg-3 text-end form-label" for="name">Full Name</label>
                     <div class="col-lg-9 col-xl-8">
                         <input id="name" class="form-control @error('name') is-invalid @enderror" type="text"
-                            name="name" value="{{ old('name', auth()->user()->name) }}" required autofocus>
-
+                            name="name" value="{{ old('name', $user->name) }}" required autofocus>
                         @error('name')
-                            <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                            <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
 
+                {{-- Email --}}
                 <div class="form-group mb-3 row">
                     <label class="col-xl-3 col-lg-3 text-end form-label" for="email">Email</label>
                     <div class="col-lg-9 col-xl-8">
                         <input id="email" class="form-control @error('email') is-invalid @enderror" type="email"
-                            name="email" value="{{ old('email', auth()->user()->email) }}" required>
-
+                            name="email" value="{{ old('email', $user->email) }}" required>
                         @error('email')
-                            <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                            <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
 
+                {{-- Address --}}
+                <div class="form-group mb-3 row">
+                    <label class="col-xl-3 col-lg-3 text-end form-label" for="address">Address</label>
+                    <div class="col-lg-9 col-xl-8">
+                        <input id="address" class="form-control" type="text" name="address"
+                            value="{{ old('address', optional($userDetail)->address) }}">
+                    </div>
+                </div>
+
+                {{-- Website --}}
+                <div class="form-group mb-3 row">
+                    <label class="col-xl-3 col-lg-3 text-end form-label" for="website">Website</label>
+                    <div class="col-lg-9 col-xl-8">
+                        <input id="website" class="form-control" type="text" name="website"
+                            value="{{ old('website', optional($userDetail)->website) }}">
+                    </div>
+                </div>
+
+                {{-- Facebook --}}
+                <div class="form-group mb-3 row">
+                    <label class="col-xl-3 col-lg-3 text-end form-label" for="facebook">Facebook</label>
+                    <div class="col-lg-9 col-xl-8">
+                        <input id="facebook" class="form-control" type="text" name="facebook"
+                            value="{{ old('facebook', optional($userDetail)->facebook) }}">
+                    </div>
+                </div>
+
+                {{-- X (Twitter) --}}
+                <div class="form-group mb-3 row">
+                    <label class="col-xl-3 col-lg-3 text-end form-label" for="x">X (Twitter)</label>
+                    <div class="col-lg-9 col-xl-8">
+                        <input id="x" class="form-control" type="text" name="x"
+                            value="{{ old('x', optional($userDetail)->x) }}">
+                    </div>
+                </div>
+
+                {{-- Instagram --}}
+                <div class="form-group mb-3 row">
+                    <label class="col-xl-3 col-lg-3 text-end form-label" for="instagram">Instagram</label>
+                    <div class="col-lg-9 col-xl-8">
+                        <input id="instagram" class="form-control" type="text" name="instagram"
+                            value="{{ old('instagram', optional($userDetail)->instagram) }}">
+                    </div>
+                </div>
+
+                {{-- Phone --}}
+                <div class="form-group mb-3 row">
+                    <label class="col-xl-3 col-lg-3 text-end form-label" for="phone">Phone</label>
+                    <div class="col-lg-9 col-xl-8">
+                        <input id="phone" class="form-control" type="text" name="phone"
+                            value="{{ old('phone', optional($userDetail)->phone) }}">
+                    </div>
+                </div>
+
+                {{-- Bio / Quotes --}}
+                <div class="form-group mb-3 row">
+                    <label class="col-xl-3 col-lg-3 text-end form-label" for="bio">Bio / About</label>
+                    <div class="col-lg-9 col-xl-8">
+                        <textarea id="bio" class="form-control" name="bio" rows="3">{{ old('bio', optional($userDetail)->bio) }}</textarea>
+                    </div>
+                </div>
+
+                {{-- Submit --}}
                 <div class="form-group row">
                     <div class="col-lg-9 col-xl-8 offset-lg-3">
                         <button type="submit" class="btn btn-primary">Update Profile</button>

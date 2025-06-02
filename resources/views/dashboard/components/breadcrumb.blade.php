@@ -1,11 +1,15 @@
 <div class="col-sm-12">
     <div class="page-title-box d-md-flex justify-content-md-between align-items-center">
-        <h4 class="page-title">Dashboard</h4>
+        <h4 class="page-title">{{ $breadcrumbs[count($breadcrumbs) - 1]['title'] ?? 'Dashboard' }}</h4>
         <div class="">
             <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item"><a href="#">Approx</a>
-                </li><!--end nav-item-->
-                <li class="breadcrumb-item active">Dashboard</li>
+                @foreach ($breadcrumbs as $index => $breadcrumb)
+                    @if (isset($breadcrumb['url']) && $index !== count($breadcrumbs) - 1)
+                        <li class="breadcrumb-item"><a href="{{ $breadcrumb['url'] }}">{{ $breadcrumb['title'] }}</a></li>
+                    @else
+                        <li class="breadcrumb-item active">{{ $breadcrumb['title'] }}</li>
+                    @endif
+                @endforeach
             </ol>
         </div>
     </div><!--end page-title-box-->
