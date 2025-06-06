@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('instagram')->nullable();
             $table->string('phone')->nullable();
             $table->text('bio')->nullable(); // untuk deskripsi diri atau kutipan
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

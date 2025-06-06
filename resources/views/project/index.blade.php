@@ -19,8 +19,10 @@
                         </div>
                         <div class="d-flex align-items-center mb-3 pb-2 border-dashed-bottom">
                             <div class="flex-shrink-0">
-                                <img src="{{ $project->logo ?? 'assets/images/logos/default-logo.png' }}" alt=""
-                                    height="50" class="rounded-circle d-inline-block">
+                                <img src="{{ $project->logo ? asset('storage/' . $project->logo) : asset('assets/images/logo-dark.png') }}"
+                                    alt="Logo {{ $project->name ?? 'Project' }}" width="100" height="50"
+                                    class="d-inline-block object-fit-contain border rounded">
+
                             </div>
                             <div class="flex-grow-1 ms-2 text-truncate">
                                 <h5 class="fw-bold mb-1 fs-15">{{ $project->name }}</h5>
@@ -30,39 +32,53 @@
                         </div>
                         <div class="d-flex justify-content-between fw-semibold align-items-center my-3">
                             <div class="img-group d-flex justify-content-center">
-                                @foreach ($project->project_managers as $member)
+                                {{-- Project Managers --}}
+                                @foreach ($project->project_managers->take($project->max_visible) as $member)
                                     <a class="user-avatar position-relative d-inline-block {{ $loop->first ? '' : 'ms-n2' }}"
                                         href="#" title="{{ $member->user_name }}">
-                                        <img src="{{ asset('assets/images/users/avatar-1.jpg') }}"
+                                        <img src="{{ $member->image ? asset($member->image) : asset('assets/images/users/avatar-1.jpg') }}"
                                             alt="{{ $member->user_name }}" class="thumb-md shadow-sm rounded-circle">
                                     </a>
                                 @endforeach
 
-                                @foreach ($project->developers as $member)
+                                {{-- Developers --}}
+                                @foreach ($project->developers->take($project->max_visible) as $member)
                                     <a class="user-avatar position-relative d-inline-block ms-n2" href="#"
                                         title="{{ $member->user_name }}">
-                                        <img src="{{ asset('assets/images/users/avatar-2.jpg') }}"
+                                        <img src="{{ $member->image ? asset($member->image) : asset('assets/images/users/avatar-2.jpg') }}"
                                             alt="{{ $member->user_name }}" class="thumb-md shadow-sm rounded-circle">
                                     </a>
                                 @endforeach
 
-                                @foreach ($project->consultants as $member)
+                                {{-- Consultants --}}
+                                @foreach ($project->consultants->take($project->max_visible) as $member)
                                     <a class="user-avatar position-relative d-inline-block ms-n2" href="#"
                                         title="{{ $member->user_name }}">
-                                        <img src="{{ asset('assets/images/users/avatar-3.jpg') }}"
+                                        <img src="{{ $member->image ? asset($member->image) : asset('assets/images/users/avatar-3.jpg') }}"
                                             alt="{{ $member->user_name }}" class="thumb-md shadow-sm rounded-circle">
                                     </a>
                                 @endforeach
 
-                                @foreach ($project->admins as $member)
+                                {{-- Admins --}}
+                                @foreach ($project->admins->take($project->max_visible) as $member)
                                     <a class="user-avatar position-relative d-inline-block ms-n2" href="#"
                                         title="{{ $member->user_name }}">
-                                        <img src="{{ asset('assets/images/users/avatar-4.jpg') }}"
+                                        <img src="{{ $member->image ? asset($member->image) : asset('assets/images/users/avatar-4.jpg') }}"
                                             alt="{{ $member->user_name }}" class="thumb-md shadow-sm rounded-circle">
                                     </a>
                                 @endforeach
+
+                                {{-- Remaining --}}
+                                @if ($project->remaining_members > 0)
+                                    <a href="#" class="user-avatar position-relative d-inline-block ms-1">
+                                        <span
+                                            class="thumb-md shadow-sm justify-content-center d-flex align-items-center bg-info-subtle rounded-circle fw-semibold fs-6">
+                                            +{{ $project->remaining_members }}
+                                        </span>
+                                    </a>
+                                @endif
                             </div>
-                            <button type="button" class="btn btn-primary btn-sm px-3">Details</button>
+                            <a href="{{ route('projects.show', encrypt($project->id)) }}" class="btn btn-primary btn-sm px-3">Details</a>
                         </div>
                         <div class="">
                             <div class="d-flex justify-content-between fw-semibold align-items-center">

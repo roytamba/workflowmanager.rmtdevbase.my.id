@@ -65,13 +65,6 @@
                             </div>
                         </div>
 
-                        <!-- Total Tasks -->
-                        <div class="col-md-6 mb-3">
-                            <label for="total_tasks" class="form-label">Total Tasks</label>
-                            <input type="number" class="form-control" id="total_tasks" name="total_tasks"
-                                min="0" value="0">
-                        </div>
-
                         <!-- Start Date -->
                         <div class="col-md-6 mb-3">
                             <label for="start_date" class="form-label">Start Date <span
@@ -83,6 +76,13 @@
                         <div class="col-md-6 mb-3">
                             <label for="end_date" class="form-label">End Date <span class="text-danger">*</span></label>
                             <input type="date" class="form-control" id="end_date" name="end_date" required>
+                        </div>
+
+                        <!-- Total Tasks -->
+                        <div class="col-md-6 mb-3">
+                            <label for="total_tasks" class="form-label">Total Tasks</label>
+                            <input type="number" class="form-control" id="total_tasks" name="total_tasks"
+                                min="0" value="0">
                         </div>
 
                         <!-- Progress -->
@@ -132,7 +132,7 @@
                             </select>
                             <small class="text-muted">Hold Ctrl/Cmd to select multiple consultants (optional)</small>
                         </div>
-                        
+
                         <!-- Admins -->
                         <div class="col-md-3 mb-3">
                             <label for="admins" class="form-label">Admins</label>
@@ -144,7 +144,7 @@
                             <small class="text-muted">Hold Ctrl/Cmd to select multiple admins (optional)</small>
                         </div>
 
-                        
+
 
                         <!-- Selected Team Members Display -->
                         <div class="col-12 mb-3">
@@ -160,12 +160,12 @@
                                         <div id="selectedDevelopers" class="text-muted">None selected</div>
                                     </div>
                                     <div class="col-md-3">
-                                        <h6 class="fw-bold text-info mb-2">Admins</h6>
-                                        <div id="selectedAdmins" class="text-muted">None selected</div>
-                                    </div>
-                                    <div class="col-md-3">
                                         <h6 class="fw-bold text-warning mb-2">Consultants</h6>
                                         <div id="selectedConsultants" class="text-muted">None selected</div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h6 class="fw-bold text-info mb-2">Admins</h6>
+                                        <div id="selectedAdmins" class="text-muted">None selected</div>
                                     </div>
                                 </div>
                             </div>
@@ -198,7 +198,7 @@
     }
 
     // Add event listeners to all multiple selects
-    ['project_managers', 'developers', 'admins', 'consultants'].forEach(id => {
+    ['project_managers', 'developers', 'consultants', 'admins'].forEach(id => {
         document.getElementById(id).addEventListener('change', () => {
             updateSelectedOptions(id, 'selected' + id.charAt(0).toUpperCase() + id.slice(1));
         });
@@ -206,7 +206,7 @@
 
     // Initialize display on modal show or page load
     document.addEventListener('DOMContentLoaded', () => {
-        ['project_managers', 'developers', 'admins', 'consultants'].forEach(id => {
+        ['project_managers', 'developers', 'consultants', 'admins'].forEach(id => {
             updateSelectedOptions(id, 'selected' + id.charAt(0).toUpperCase() + id.slice(1));
         });
     });

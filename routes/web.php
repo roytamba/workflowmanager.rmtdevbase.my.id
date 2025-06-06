@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -53,5 +54,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile/delete', [AuthController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/project', [ProjectController::class, 'index'])->name('projects.index');
+    Route::get('/project/show/{id}', [ProjectController::class, 'show'])->name('projects.show');
     Route::post('/project', [ProjectController::class, 'store'])->name('projects.store');
+
+    Route::get('/user', [UserController::class, 'index'])->name('users.index');
+    Route::post('/users', [UserController::class, 'store'])->name('users.store');
+    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+
 });

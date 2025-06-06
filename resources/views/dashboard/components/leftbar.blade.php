@@ -33,6 +33,18 @@
                             <i class="iconoir-fire-flame menu-icon"></i>
                             <span>Project</span>
                         </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user">
+                            <i class="iconoir-community menu-icon"></i>
+                            <span>Users</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/authorization">
+                            <i class="iconoir-community menu-icon"></i>
+                            <span>Authorization</span>
+                        </a>
                     </li><!--end nav-item-->
                     <!--end nav-item-->
                 </ul><!--end navbar-nav--->
