@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -58,7 +61,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/project', [ProjectController::class, 'store'])->name('projects.store');
 
     Route::get('/user', [UserController::class, 'index'])->name('users.index');
-    Route::post('/users', [UserController::class, 'store'])->name('users.store');
-    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+    Route::post('/user', [UserController::class, 'store'])->name('users.store');
+    Route::put('/user/{id}', [UserController::class, 'update'])->name('users.update');
+
+    Route::get('/role', [RoleController::class, 'index'])->name('roles.index');
+    Route::post('/role', [RoleController::class, 'store'])->name('roles.store');
+    Route::put('/role/{id}', [RoleController::class, 'update'])->name('roles.update');
+
+    Route::get('/position', [PositionController::class, 'index'])->name('positions.index');
+    Route::post('/position', [PositionController::class, 'store'])->name('positions.store');
+    Route::put('/position/{id}', [PositionController::class, 'update'])->name('positions.update');
+
+    Route::get('/client', [ClientController::class, 'index'])->name('clients.index');
+    Route::post('/client', [ClientController::class, 'store'])->name('clients.store');
+    Route::put('/client/{id}', [ClientController::class, 'update'])->name('clients.update');
 
 });

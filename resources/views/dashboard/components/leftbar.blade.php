@@ -27,7 +27,6 @@
                             <i class="iconoir-report-columns menu-icon"></i>
                             <span>Dashboard</span>
                         </a>
-                    </li><!--end nav-item-->
                     <li class="nav-item">
                         <a class="nav-link" href="/project">
                             <i class="iconoir-fire-flame menu-icon"></i>
@@ -35,17 +34,29 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/user">
-                            <i class="iconoir-community menu-icon"></i>
-                            <span>Users</span>
+                        <a class="nav-link" href="/client">
+                            <i class="iconoir-user-bag menu-icon"></i>
+                            <span>Client</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/authorization">
+                        <a class="nav-link" href="/user">
                             <i class="iconoir-community menu-icon"></i>
-                            <span>Authorization</span>
+                            <span>User</span>
                         </a>
-                    </li><!--end nav-item-->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/position">
+                            <i class="iconoir-user-star menu-icon"></i>
+                            <span>Postion</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/role">
+                            <i class="iconoir-learning menu-icon"></i>
+                            <span>Role</span>
+                        </a>
+                    </li>
                     <!--end nav-item-->
                 </ul><!--end navbar-nav--->
             </div>

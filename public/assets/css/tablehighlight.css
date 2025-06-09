@@ -1,0 +1,9 @@
+/* Highlight baris tabel saat hover */
+#datatable_1 tbody tr:hover {
+    background-color: #e9f5ff; /* warna biru muda */
+    transition: background-color 0.3s ease;
+}
+/* Jika ingin kursor pointer lebih jelas */
+#datatable_1 tbody tr:hover {
+    cursor: pointer;
+}

@@ -40,6 +40,17 @@
                                 required>
                         </div>
                     </div>
+
+                    <!-- Tambahan Status -->
+                    <div class="mb-2">
+                        <label for="status">Status</label>
+                        <select class="form-select" name="status" required>
+                            <option value="" disabled selected>Select Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <!-- Tambahkan status lain sesuai kebutuhan -->
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary w-100">Add User</button>

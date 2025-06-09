@@ -11,21 +11,33 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = collect(DB::select('SELECT * FROM users u JOIN user_details ud ON u.id = ud.user_id'));
+        $users = collect(DB::select('SELECT u.id, u.name, u.email, ud.image, u.created_at, u.status FROM users u LEFT JOIN user_details ud ON u.id = ud.user_id'))
+            ->map(function ($user) {
+                // Kalau image kosong, assign default random avatar
+                if (empty($user->image)) {
+                    $user->image = 'assets/images/users/avatar-' . rand(1, 8) . '.jpg';
+                } else {
+                    $user->image = 'storage/' . $user->image;
+                }
+                return $user;
+            });
+
         return view('user.index', compact('users'));
     }
+
 
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name'   => 'required|string|max:255',
             'email'  => 'required|string|email|max:255|unique:users',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -46,15 +58,15 @@ class UserController extends Controller
             ]);
 
             // Upload avatar jika ada
-            $avatarPath = null;
-            if ($request->hasFile('avatar')) {
-                $avatarPath = $request->file('avatar')->store('user/avatars', 'public');
+            $imagePath = null;
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('user/images', 'public');
             }
 
             // Simpan detail user
             UserDetails::create([
                 'user_id' => $user->id,
-                'image'   => $avatarPath, // kolom image di tabel user_details
+                'image'   => $imagePath, // kolom image di tabel user_details
             ]);
 
             return response()->json([
@@ -72,37 +84,39 @@ class UserController extends Controller
     public function update(Request $request, $encryptedId)
     {
         $id = Crypt::decrypt(urldecode($encryptedId));
+        $user = User::findOrFail($id);
         $validator = Validator::make($request->all(), [
             'name'   => 'required|string|max:255',
-            'email'  => 'required|string|email|max:255|unique:users,email,' . $id,
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user)],
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        
+
+
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        
+
         try {
             $user = User::findOrFail($id);
             $user->name = $request->name;
             $user->email = $request->email;
             $user->save();
 
-            $avatarPath = $user->detail->image ?? null;
+            $imagePath = $user->detail->image ?? null;
 
-            if ($request->hasFile('avatar')) {
+            if ($request->hasFile('image')) {
                 // Hapus gambar lama jika ada
-                if ($avatarPath && Storage::disk('public')->exists($avatarPath)) {
-                    Storage::disk('public')->delete($avatarPath);
+                if ($imagePath && Storage::disk('public')->exists($imagePath)) {
+                    Storage::disk('public')->delete($imagePath);
                 }
 
                 // Upload baru
-                $avatarPath = $request->file('avatar')->store('avatars', 'public');
+                $imagePath = $request->file('image')->store('user/images', 'public');
             }
 
             UserDetails::updateOrCreate(
                 ['user_id' => $user->id],
-                ['image' => $avatarPath]
+                ['image' => $imagePath]
             );
 
             return redirect()->back()->with('success', 'User updated successfully.');

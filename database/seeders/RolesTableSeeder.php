@@ -11,57 +11,53 @@ class RolesTableSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
-        DB::table('role_types')->insert([
+        $roles = [
             [
-                'name' => 'Software Developer',
-                'description' => 'Roles related to coding and development',
+                'name' => 'Admin',
+                'description' => 'User with full access to all system features and settings',
+                'status' => 'active',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'name' => 'Quality Assurance',
-                'description' => 'Testing and validation roles',
+                'name' => 'Manager',
+                'description' => 'User managing projects and teams',
+                'status' => 'active',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'name' => 'Project Management',
-                'description' => 'Roles responsible for project delivery and team coordination',
+                'name' => 'Employee',
+                'description' => 'Regular user working on assigned tasks',
+                'status' => 'active',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'name' => 'UI/UX Design',
-                'description' => 'Design-focused roles for user experience and interface',
+                'name' => 'Guest',
+                'description' => 'User with limited access, usually read-only',
+                'status' => 'inactive',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'name' => 'DevOps',
-                'description' => 'Infrastructure and deployment automation roles',
+                'name' => 'HR',
+                'description' => 'Human Resource user responsible for employee management',
+                'status' => 'active',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'name' => 'Architecture',
-                'description' => 'High-level technical planning and systems architecture',
+                'name' => 'Developer',
+                'description' => 'User responsible for application development',
+                'status' => 'active',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            [
-                'name' => 'Consulting',
-                'description' => 'Client-facing and advisory roles',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Administration',
-                'description' => 'Administrative roles including system and office administration',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ]);
+        ];
+
+        DB::table('roles')->insert($roles);
     }
 }

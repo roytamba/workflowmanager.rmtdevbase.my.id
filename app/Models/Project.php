@@ -9,15 +9,15 @@ class Project extends Model
     protected $table = 'projects';
     protected $fillable = [
         'name',
-        'client_name',
-        'logo',
-        'status',
-        'budget',
-        'total_tasks',
         'start_date',
         'end_date',
-        'progress',
         'description',
-        'created_by'
+        'created_by',
+        'deployment_status',
+        'uat_link',
+        'live_link',
+        'checkout_link',
+        'image',
+        'status',
     ];
 }

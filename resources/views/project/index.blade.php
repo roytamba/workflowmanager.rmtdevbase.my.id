@@ -13,108 +13,80 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <div class="position-absolute end-0 me-3">
+                        <div class="position-absolute  end-0 me-3">
                             <span
                                 class="badge rounded text-success bg-transparent border border-primary">{{ $project->status }}</span>
                         </div>
                         <div class="d-flex align-items-center mb-3 pb-2 border-dashed-bottom">
                             <div class="flex-shrink-0">
-                                <img src="{{ $project->logo ? asset('storage/' . $project->logo) : asset('assets/images/logo-dark.png') }}"
-                                    alt="Logo {{ $project->name ?? 'Project' }}" width="100" height="50"
-                                    class="d-inline-block object-fit-contain border rounded">
-
+                                <img src="{{ $project->image ? asset($project->image) : asset('assets/images/logo-sm.png') }}"
+                                    alt="" height="50" class="d-inline-block">
                             </div>
                             <div class="flex-grow-1 ms-2 text-truncate">
                                 <h5 class="fw-bold mb-1 fs-15">{{ $project->name }}</h5>
-                                <p class="text-dark mb-0 fs-13 fw-semibold"><span class="text-muted">Client :
-                                    </span>{{ $project->client_name }}</p>
+                                <p class="text-dark mb-0 fs-13 fw-semibold">
+                                    <span class="text-muted">Client :
+                                    </span>{{ $project->client ? $project->client : 'Not Set' }}
+                                </p>
                             </div><!--end media-body-->
                         </div>
-                        <div class="d-flex justify-content-between fw-semibold align-items-center my-3">
+                        <div class="d-flex justify-content-between fw-semibold align-items-center  my-3">
                             <div class="img-group d-flex justify-content-center">
-                                {{-- Project Managers --}}
-                                @foreach ($project->project_managers->take($project->max_visible) as $member)
-                                    <a class="user-avatar position-relative d-inline-block {{ $loop->first ? '' : 'ms-n2' }}"
-                                        href="#" title="{{ $member->user_name }}">
-                                        <img src="{{ $member->image ? asset($member->image) : asset('assets/images/users/avatar-1.jpg') }}"
-                                            alt="{{ $member->user_name }}" class="thumb-md shadow-sm rounded-circle">
-                                    </a>
-                                @endforeach
-
-                                {{-- Developers --}}
-                                @foreach ($project->developers->take($project->max_visible) as $member)
-                                    <a class="user-avatar position-relative d-inline-block ms-n2" href="#"
-                                        title="{{ $member->user_name }}">
-                                        <img src="{{ $member->image ? asset($member->image) : asset('assets/images/users/avatar-2.jpg') }}"
-                                            alt="{{ $member->user_name }}" class="thumb-md shadow-sm rounded-circle">
-                                    </a>
-                                @endforeach
-
-                                {{-- Consultants --}}
-                                @foreach ($project->consultants->take($project->max_visible) as $member)
-                                    <a class="user-avatar position-relative d-inline-block ms-n2" href="#"
-                                        title="{{ $member->user_name }}">
-                                        <img src="{{ $member->image ? asset($member->image) : asset('assets/images/users/avatar-3.jpg') }}"
-                                            alt="{{ $member->user_name }}" class="thumb-md shadow-sm rounded-circle">
-                                    </a>
-                                @endforeach
-
-                                {{-- Admins --}}
-                                @foreach ($project->admins->take($project->max_visible) as $member)
-                                    <a class="user-avatar position-relative d-inline-block ms-n2" href="#"
-                                        title="{{ $member->user_name }}">
-                                        <img src="{{ $member->image ? asset($member->image) : asset('assets/images/users/avatar-4.jpg') }}"
-                                            alt="{{ $member->user_name }}" class="thumb-md shadow-sm rounded-circle">
-                                    </a>
-                                @endforeach
-
-                                {{-- Remaining --}}
-                                @if ($project->remaining_members > 0)
-                                    <a href="#" class="user-avatar position-relative d-inline-block ms-1">
-                                        <span
-                                            class="thumb-md shadow-sm justify-content-center d-flex align-items-center bg-info-subtle rounded-circle fw-semibold fs-6">
-                                            +{{ $project->remaining_members }}
-                                        </span>
-                                    </a>
-                                @endif
+                                <a class="user-avatar position-relative d-inline-block" href="#">
+                                    <img src="assets/images/users/avatar-1.jpg" alt="avatar"
+                                        class="thumb-md shadow-sm rounded-circle">
+                                </a>
+                                <a class="user-avatar position-relative d-inline-block ms-n2" href="#">
+                                    <img src="assets/images/users/avatar-4.jpg" alt="avatar"
+                                        class="thumb-md shadow-sm rounded-circle">
+                                </a>
+                                <a class="user-avatar position-relative d-inline-block ms-n2" href="#">
+                                    <img src="assets/images/users/avatar-6.jpg" alt="avatar"
+                                        class="thumb-md shadow-sm rounded-circle">
+                                </a>
+                                <a href="" class="user-avatar position-relative d-inline-block ms-1">
+                                    <span
+                                        class="thumb-md shadow-sm justify-content-center d-flex align-items-center bg-info-subtle rounded-circle fw-semibold fs-6">+6</span>
+                                </a>
                             </div>
-                            <a href="{{ route('projects.show', encrypt($project->id)) }}" class="btn btn-primary btn-sm px-3">Details</a>
+                            <button type="button" class="btn btn-primary btn-sm px-3">Details</button>
                         </div>
                         <div class="">
                             <div class="d-flex justify-content-between fw-semibold align-items-center">
                                 <p class="mb-1 d-inline-flex align-items-center"><i
-                                        class="iconoir-task-list fs-18 text-muted me-1"></i>{{ $project->total_tasks }}
-                                    Tasks</p>
+                                        class="iconoir-task-list fs-18 text-muted me-1"></i>Task: {{ $project->task ? $project->task : 'Not Set' }}</p>
                                 <small
-                                    class="text-end text-body-emphasis d-block ms-auto">{{ $project->progress }}%</small>
+                                    class="text-end text-body-emphasis d-block ms-auto">{{ $project->progress ? $project->progress : 0 }}%</small>
                             </div>
                             <div class="progress bg-secondary-subtle" style="height:5px;">
                                 <div class="progress-bar bg-secondary rounded-pill" role="progressbar"
-                                    style="margin-right:2px; width: {{ $project->progress }}%"
-                                    aria-valuenow="{{ $project->progress }}" aria-valuemin="0" aria-valuemax="100">
+                                    style="margin-right:2px; width: {{ $project->progress ? $project->progress : 0 }}% "
+                                    aria-valuenow="{{ $project->progress ? $project->progress : 0 }}" aria-valuemin="0"
+                                    aria-valuemax="100">
                                 </div>
                             </div>
                             <div class="row mt-3 align-items-center">
                                 <div class="col-auto col-md-5">
                                     <div class="text-start">
-                                        <h5 class="fs-16 fw-semibold mb-0">${{ number_format($project->budget, 0) }}</h5>
-                                        <p class="mb-0 text-muted">Total Budget</p>
+                                        <h5 class="fs-16 fw-semibold mb-0">
+                                            {{ $project->budget ? $project->budget : 'Not Set' }}</h5>
+                                        <p class="mb-0  text-muted">Total Budget</p>
                                     </div>
                                 </div>
                                 <div class="col col-md-7 text-end align-self-center">
-                                    <h6 class="fw-normal text-muted fs-12 mb-1">Start : <span
-                                            class="text-dark fw-semibold">{{ \Carbon\Carbon::parse($project->start_date)->format('d M Y') }}</span>
-                                    </h6>
+                                    <h6 class="fw-normal text-muted fs-12 mb-1">Start : <span class="text-dark fw-semibold">
+                                            {{ $project->end_date ? $project->start_date : 'Not Set' }}</span></h6>
                                     <h6 class="fw-normal text-muted mb-0 fs-12">Deadline : <span
-                                            class="text-dark fw-semibold">{{ \Carbon\Carbon::parse($project->deadline)->format('d M Y') }}</span>
-                                    </h6>
+                                            class="text-dark fw-semibold">
+                                            {{ $project->end_date ? $project->end_date : 'Not Set' }}</span></h6>
                                 </div><!--end col-->
                             </div> <!--end row-->
                         </div>
                     </div><!--end card-body-->
-                </div><!--end card-->
+                </div>
             </div>
         @endforeach
+
     </div>
 
     <!-- Modal Add Project -->
@@ -125,125 +97,28 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        const logoInput = document.getElementById('project_logo');
-        logoInput.addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: '{{ session('success') }}',
+            });
+        @endif
 
-            if (file) {
-                if (!allowedTypes.includes(file.type)) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Invalid File Type',
-                        text: 'Please upload an image file (jpg, png, gif, webp)',
-                    });
-                    logoInput.value = '';
-                    return;
-                }
+        @if (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: '{{ session('error') }}',
+            });
+        @endif
 
-                if (file.size > 2 * 1024 * 1024) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'File Too Large',
-                        text: 'File size must not exceed 2 MB.',
-                    });
-                    logoInput.value = '';
-                    return;
-                }
-
-                // Preview (opsional, tampilkan di bawah input)
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    let preview = document.getElementById('logoPreview');
-                    if (!preview) {
-                        preview = document.createElement('img');
-                        preview.id = 'logoPreview';
-                        preview.classList.add('mt-2', 'rounded');
-                        preview.style.maxHeight = '100px';
-                        logoInput.parentElement.appendChild(preview);
-                    }
-                    preview.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Function to update selected team members display
-        function updateTeamMembersDisplay() {
-            // Update Project Managers
-            const pmsSelect = document.getElementById('project_managers');
-            const selectedPMs = document.getElementById('selectedPMs');
-            const selectedPMOptions = Array.from(pmsSelect.selectedOptions);
-            if (selectedPMOptions.length > 0) {
-                selectedPMs.innerHTML = selectedPMOptions.map(option =>
-                    `<span class="badge bg-primary me-1 mb-1">${option.text}</span>`
-                ).join('');
-            } else {
-                selectedPMs.innerHTML = '<span class="text-muted">None selected</span>';
-            }
-
-            // Update Developers
-            const developersSelect = document.getElementById('developers');
-            const selectedDevelopers = document.getElementById('selectedDevelopers');
-            const selectedDeveloperOptions = Array.from(developersSelect.selectedOptions);
-            if (selectedDeveloperOptions.length > 0) {
-                selectedDevelopers.innerHTML = selectedDeveloperOptions.map(option =>
-                    `<span class="badge bg-success me-1 mb-1">${option.text}</span>`
-                ).join('');
-            } else {
-                selectedDevelopers.innerHTML = '<span class="text-muted">None selected</span>';
-            }
-
-            // Update Admins
-            const adminsSelect = document.getElementById('admins');
-            const selectedAdmins = document.getElementById('selectedAdmins');
-            const selectedAdminOptions = Array.from(adminsSelect.selectedOptions);
-            if (selectedAdminOptions.length > 0) {
-                selectedAdmins.innerHTML = selectedAdminOptions.map(option =>
-                    `<span class="badge bg-info me-1 mb-1">${option.text}</span>`
-                ).join('');
-            } else {
-                selectedAdmins.innerHTML = '<span class="text-muted">None selected</span>';
-            }
-        }
-
-        // Add event listeners for team selection updates
-        document.getElementById('project_managers').addEventListener('change', updateTeamMembersDisplay);
-        document.getElementById('developers').addEventListener('change', updateTeamMembersDisplay);
-        document.getElementById('admins').addEventListener('change', updateTeamMembersDisplay);
-
-        // Reset form saat modal dibuka
-        document.getElementById('addProjectModal').addEventListener('show.bs.modal', function(event) {
-            document.querySelector('#addProjectModal form').reset();
-            const preview = document.getElementById('logoPreview');
-            if (preview) preview.remove();
-            updateTeamMembersDisplay();
-        });
-
-        // Form validation before submit
-        document.querySelector('#addProjectModal form').addEventListener('submit', function(e) {
-            const pmsSelected = document.getElementById('project_managers').selectedOptions.length;
-            const developersSelected = document.getElementById('developers').selectedOptions.length;
-
-            if (pmsSelected === 0) {
-                e.preventDefault();
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Project Manager Required',
-                    text: 'Please select at least one project manager for this project.',
-                });
-                return;
-            }
-
-            if (developersSelected === 0) {
-                e.preventDefault();
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Developers Required',
-                    text: 'Please select at least one developer for this project.',
-                });
-                return;
-            }
-        });
+        @if (session('validation_errors'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Validation Error',
+                html: `{!! implode('<br>', session('validation_errors')) !!}`,
+            });
+        @endif
     </script>
 @endpush

@@ -14,21 +14,16 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('client_name')->nullable();
-            $table->string('logo')->nullable();
-            $table->enum('status', ['In Progress', 'Completed', 'On Hold', 'Cancelled'])->default('In Progress');
-            $table->decimal('budget', 12, 2)->default(0);
-            $table->integer('total_tasks')->default(0);
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->integer('progress')->default(0);
+            $table->enum('status', ['in_progress', 'completed', 'on_hold', 'cancelled'])->default('in_progress');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('created_by');
-
-            // Kolom tambahan UAT / Live info
-            $table->enum('deployment_status', ['None', 'UAT', 'Live'])->default('None');
+            $table->enum('deployment_status', ['none', 'uat', 'live'])->default('none');
             $table->string('uat_link')->nullable();
             $table->string('live_link')->nullable();
+            $table->string('checkout_link')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

@@ -15,6 +15,7 @@ class UserDetails extends Model
         'address',
         'language',
         'bio',
+        'image',
     ];
 
     public function user() {

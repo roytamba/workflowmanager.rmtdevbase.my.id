@@ -14,16 +14,16 @@
                     <div class="modal-body">
                         <div class="form-group mb-2">
                             <div class="d-flex align-items-center">
-                                <img id="avatarPreviewEdit{{ $user->id }}"
-                                    src="{{ $user->detail && $user->detail->image ? asset('storage/' . $user->detail->image) : asset('assets/images/users/default.png') }}"
-                                    alt="Avatar Preview" class="me-2 border border-dashed rounded-circle" width="80"
+                                <img id="imagePreviewEdit{{ $user->id }}"
+                                    src="{{ $user->image ? asset($user->image) : asset('assets/images/users/default.png') }}"
+                                    alt="Image Preview" class="me-2 border border-dashed rounded-circle" width="80"
                                     height="80" style="object-fit: cover;">
 
                                 <div class="flex-grow-1 text-truncate">
                                     <label class="btn btn-sm btn-primary text-light">
-                                        Change Avatar
-                                        <input type="file" name="avatar" hidden accept="image/*"
-                                            onchange="previewImage(this, 'avatarPreviewEdit{{ $user->id }}')">
+                                        Change Image
+                                        <input type="file" name="image" hidden accept="image/*"
+                                            onchange="previewImage(this, 'imagePreviewEdit{{ $user->id }}')">
                                     </label>
                                 </div>
                             </div>
@@ -45,6 +45,16 @@
                                 <input type="email" class="form-control" name="email" value="{{ $user->email }}"
                                     required>
                             </div>
+                        </div>
+
+                        <!-- Tambahan Status -->
+                        <div class="mb-2">
+                            <label for="status">Status</label>
+                            <select class="form-select" name="status" required>
+                                <option value="active" {{ $user->status == 'active' ? 'selected' : '' }}>Active</option>
+                                <option value="inactive" {{ $user->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                <!-- Tambahkan status lain jika ada -->
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
