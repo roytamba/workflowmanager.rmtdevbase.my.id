@@ -14,7 +14,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h4 class="card-title">Module Position</h4>
+                            <h4 class="card-title">Table Position</h4>
                         </div>
                         <div class="col-auto">
                             <button class="btn bg-primary text-white" data-bs-toggle="modal" data-bs-target="#addPosition">

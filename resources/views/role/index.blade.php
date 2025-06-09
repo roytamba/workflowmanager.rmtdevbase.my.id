@@ -14,7 +14,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h4 class="card-title">Module Role</h4>
+                            <h4 class="card-title">Table Role</h4>
                         </div><!--end col-->
                         <div class="col-auto">
                             <button class="btn bg-primary text-white" data-bs-toggle="modal" data-bs-target="#addRole">

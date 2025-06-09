@@ -7,6 +7,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserDesignationController;
+use App\Http\Controllers\UserManagementController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -75,5 +77,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/client', [ClientController::class, 'index'])->name('clients.index');
     Route::post('/client', [ClientController::class, 'store'])->name('clients.store');
     Route::put('/client/{id}', [ClientController::class, 'update'])->name('clients.update');
+
+    Route::get('/user-designation', [UserDesignationController::class, 'index'])->name('user-designations.index');
+    Route::post('/user-designation', [UserDesignationController::class, 'store'])->name('user-designations.store');
+    Route::put('/user-designation/{id}', [UserDesignationController::class, 'update'])->name('user-designations.update');
 
 });

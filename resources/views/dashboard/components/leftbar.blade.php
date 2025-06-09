@@ -12,6 +12,7 @@
         </a>
     </div>
     <!--end brand-->
+
     <!--start startbar-menu-->
     <div class="startbar-menu">
         <div class="startbar-collapse" id="startbarCollapse" data-simplebar>
@@ -27,38 +28,58 @@
                             <i class="iconoir-report-columns menu-icon"></i>
                             <span>Dashboard</span>
                         </a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="/project">
                             <i class="iconoir-fire-flame menu-icon"></i>
                             <span>Project</span>
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="/client">
                             <i class="iconoir-user-bag menu-icon"></i>
                             <span>Client</span>
                         </a>
                     </li>
+
+                    <!-- User Management Menu -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/user">
+                        <a class="nav-link collapsed" data-bs-toggle="collapse" href="#userManagementMenu" role="button"
+                            aria-expanded="false" aria-controls="userManagementMenu">
                             <i class="iconoir-community menu-icon"></i>
-                            <span>User</span>
+                            <span>User Management</span>
+                            <i class="mdi mdi-chevron-down ms-auto"></i>
                         </a>
+                        <div class="collapse" id="userManagementMenu">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/user-designation">
+                                        <i class="iconoir-network-right menu-icon"></i> User Designation
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/user">
+                                        <i class="iconoir-user menu-icon"></i> User
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/position">
+                                        <i class="iconoir-user-star menu-icon"></i> Position
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/role">
+                                        <i class="iconoir-learning menu-icon"></i> Role
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/position">
-                            <i class="iconoir-user-star menu-icon"></i>
-                            <span>Postion</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/role">
-                            <i class="iconoir-learning menu-icon"></i>
-                            <span>Role</span>
-                        </a>
-                    </li>
-                    <!--end nav-item-->
-                </ul><!--end navbar-nav--->
+                    <!-- End User Management -->
+
+                </ul><!--end navbar-nav-->
             </div>
         </div><!--end startbar-collapse-->
     </div><!--end startbar-menu-->

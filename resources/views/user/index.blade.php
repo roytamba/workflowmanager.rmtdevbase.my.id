@@ -12,7 +12,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h4 class="card-title">Users Details</h4>
+                            <h4 class="card-title">Table User</h4>
                         </div><!--end col-->
                         <div class="col-auto">
                             <button class="btn bg-primary text-white" data-bs-toggle="modal" data-bs-target="#addUser"><i

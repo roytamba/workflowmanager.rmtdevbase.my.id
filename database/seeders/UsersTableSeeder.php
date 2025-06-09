@@ -18,12 +18,12 @@ class UsersTableSeeder extends Seeder
         $faker = Faker::create();
         $users = [];
 
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= 9; $i++) {
             $users[] = [
                 'name' => $faker->name(),
                 'email' => $faker->unique()->safeEmail(),
                 'email_verified_at' => now(),
-                'password' => Hash::make('password123'),
+                'password' => Hash::make('password'),
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
