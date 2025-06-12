@@ -5,10 +5,13 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectDetailController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserDesignationController;
 use App\Http\Controllers\UserManagementController;
+use App\Models\ProjectDetail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -61,6 +64,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/project', [ProjectController::class, 'index'])->name('projects.index');
     Route::get('/project/show/{id}', [ProjectController::class, 'show'])->name('projects.show');
     Route::post('/project', [ProjectController::class, 'store'])->name('projects.store');
+    Route::put('/project/{id}', [ProjectController::class, 'update'])->name('projects.update');
+    
+    Route::post('/project-details', [ProjectDetailController::class, 'store'])->name('project-details.store');
+    Route::put('/project-details/{id}', [ProjectDetailController::class, 'update'])->name('project-details.update');
 
     Route::get('/user', [UserController::class, 'index'])->name('users.index');
     Route::post('/user', [UserController::class, 'store'])->name('users.store');
@@ -81,5 +88,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/user-designation', [UserDesignationController::class, 'index'])->name('user-designations.index');
     Route::post('/user-designation', [UserDesignationController::class, 'store'])->name('user-designations.store');
     Route::put('/user-designation/{id}', [UserDesignationController::class, 'update'])->name('user-designations.update');
+
+    Route::get('/task', [TaskController::class, 'index'])->name('tasks.index');
+    Route::post('/task', [TaskController::class, 'store'])->name('tasks.store');
+    Route::put('/task/{id}', [TaskController::class, 'update'])->name('tasks.update');
 
 });
